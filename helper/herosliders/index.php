@@ -37,8 +37,8 @@ function custom_hero_slider_columns($columns)
 {
     $new_columns = array(
         'cb' => '<input type="checkbox" />',
-        'thumbnail' => __('Thumbnail'),
         'title' => __('Title'),
+        'thumbnail' => __('Thumbnail'),
         'date' => __('Date'),
     );
     return $new_columns;

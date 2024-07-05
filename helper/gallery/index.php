@@ -1,5 +1,5 @@
 <?php
-function register_Photo_post_type()
+function register_photo_post_type()
 {
     $labels = array(
         'name'               => __('Photos', 'text-domain'),
@@ -30,27 +30,27 @@ function register_Photo_post_type()
 
     register_post_type('Photo', $args);
 }
-add_action('init', 'register_Photo_post_type');
+add_action('init', 'register_photo_post_type');
 
-function custom_Photo_columns($columns)
+function custom_photo_columns($columns)
 {
     $new_columns = array(
         'cb' => '<input type="checkbox" />',
-        'thumbnail' => __('Thumbnail'),
         'title' => __('Title'),
+        'thumbnail' => __('Thumbnail'),
         'date' => __('Date'),
     );
     return $new_columns;
 }
-add_filter('manage_Photo_posts_columns', 'custom_Photo_columns');
+add_filter('manage_photo_posts_columns', 'custom_photo_columns');
 
-function custom_Photo_column_data($column, $post_id)
+function custom_photo_column_data($column, $post_id)
 {
     switch ($column) {
         case 'thumbnail':
-            $thumbnail = get_field('background', $post_id)['sizes']['thumbnail'];
+            $thumbnail = get_field('images', $post_id)[0]['sizes']['thumbnail'];
             if ($thumbnail) {
-                echo '<img src="' . esc_url($thumbnail) . '"/>';
+                echo '<img style="width:200px" src="' . esc_url($thumbnail) . '"/>';
             } else {
                 echo 'No Thumbnail';
             }
@@ -59,4 +59,4 @@ function custom_Photo_column_data($column, $post_id)
             break;
     }
 }
-add_action('manage_Photo_posts_custom_column', 'custom_Photo_column_data', 10, 2);
+add_action('manage_photo_posts_custom_column', 'custom_photo_column_data', 10, 2);

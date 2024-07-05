@@ -26,7 +26,7 @@ function register_member_post_type()
         'rewrite'            => array('slug' => 'hero-Member'), // Custom slug
         'show_in_rest'       => true, // Enable Gutenberg editor support
         // 'show_ui'            => false, 
-        // 'show_in_menu'       => false,
+        'show_in_menu'       => false,
     );
 
     register_post_type('member', $args);
@@ -37,8 +37,8 @@ function custom_member_columns($columns)
 {
     $new_columns = array(
         'cb' => '<input type="checkbox" />',
-        'thumbnail' => __('Thumbnail'),
         'title' => __('Title'),
+        'thumbnail' => __('Thumbnail'),
         'date' => __('Date'),
     );
     return $new_columns;
@@ -51,7 +51,7 @@ function custom_member_column_data($column, $post_id)
         case 'thumbnail':
             $thumbnail = get_field('logo', $post_id);
             if ($thumbnail) {
-                echo '<img src="' . esc_url($thumbnail) . '"/>';
+                echo '<img style="width:300px;height:50px;object-fit:contain" src="' . esc_url($thumbnail) . '"/>';
             } else {
                 echo 'No Thumbnail';
             }

@@ -37,5 +37,22 @@ function register_master_menu()
         'manage_options',
         'edit.php?post_type=photo',
     );
+    add_submenu_page(
+        'master_menu',
+        'Members Logo',
+        'Members Logo',
+        'manage_options',
+        'edit.php?post_type=member',
+    );
 }
 add_action('admin_menu', 'register_master_menu');
+
+function hide_master_submenu()
+{
+    echo '<style>
+        #toplevel_page_master_menu .wp-submenu li:nth-child(2) {
+            display: none;
+        }
+    </style>';
+}
+add_action('admin_head', 'hide_master_submenu');
